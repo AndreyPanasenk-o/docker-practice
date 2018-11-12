@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ../../UI/docker-practice-ui
+      dockerfile: ./Docker/Release/Dockerfile
+    ports:
+      - "4000:3000"
+    depends_on:
+      - server
+  server:
+    build:
+      context: ../../Server/docker-practice-server
+      dockerfile: ./Docker/Release/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - migrator
+  db:
+    build:
+        context: ../../db
+        dockerfile: ./Docker/Release/Dockerfile
+  migrator:
+    build:
+      context: ../../Migrator/Migrator
+      dockerfile: ./Docker/Release/Dockerfile
+    depends_on:
+      - db
+    restart:
+      on-failure

@@ -1,8 +1,6 @@
 FROM microsoft/dotnet:2.0-sdk AS build-env
 WORKDIR /Migrator
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
 COPY . ./
 
 ENV http_proxy 'http://proxy.corp.isddesign.com:8080'

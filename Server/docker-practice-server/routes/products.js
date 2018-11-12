@@ -1,9 +1,10 @@
 var express = require('express');
+fs = require('fs');
 var router = express.Router();
 
 var cassandra = require('cassandra-driver');
-
-var client = new cassandra.Client({ contactPoints: ['10.88.20.95'], protocolOptions: { port: 9043} })
+var host = "10.88.20.95";
+var client = new cassandra.Client({ contactPoints: [host], protocolOptions: { port: 9042} })
 
 client.connect((err, result) => {
   console.log("cassandra connected");
@@ -18,7 +19,16 @@ router.get('/', function (req, res, next) {
       res.status(404).send({ msg: err });
     }
     else {
-      res.json({ products: result.rows });
+      res.json({
+        products: result.rows.map(row => {
+          return {
+            id: row.id,
+            description: row.description,
+            name: row.name,
+            price: row.price,
+            mainImageUrl: 'http://' + host + ':3000/image?imageName=' + row.img
+        }
+      }) });
     }
   });
 });

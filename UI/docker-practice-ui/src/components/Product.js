@@ -7,7 +7,7 @@ class Product extends Component {
         return (
             <div className="link card" onClick={()=>this.props.onProductSelectCallback(product)} style={{ cursor: 'pointer' }}>
                 <div className="image">
-                    <img className="img" src={product.img} />
+                    <img className="img" src={product.mainImageUrl} />
                 </div>
                 <div className="content">
                     <div className="header">{product.name}</div>

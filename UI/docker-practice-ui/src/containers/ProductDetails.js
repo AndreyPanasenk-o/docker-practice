@@ -8,14 +8,14 @@ class ProductDetails extends Component {
         }
         return (
             <div>
-                <div class="ui huge rounded left floated top aligned image">
-                    <img src={this.props.active.img} />
+                <div className="ui huge rounded left floated top aligned image">
+                    <img src={this.props.active.mainImageUrl} />
                 </div>
-                <div class="ui middle aligned card">
-                    <div class="content">
-                        <a class="header">{this.props.active.name}</a>
-                        <div class="meta">{this.props.active.description}</div>
-                        <div class="description">>Price: ${this.props.active.price}</div>
+                <div className="ui middle aligned card">
+                    <div className="content">
+                        <a className="header">{this.props.active.name}</a>
+                        <div className="meta">{this.props.active.description}</div>
+                        <div className="description">>Price: ${this.props.active.price}</div>
                     </div>
                 </div>
             </div>

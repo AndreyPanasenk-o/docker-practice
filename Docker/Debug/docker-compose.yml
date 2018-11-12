@@ -1,0 +1,37 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ../../UI/docker-practice-ui
+      dockerfile: ./Docker/Debug/Dockerfile
+    ports:
+      - "4000:3000"
+    volumes:
+      - ../../UI/docker-practice-ui/:/usr/src/app
+    command: "npm start"
+    depends_on:
+      - server
+  server:
+    build:
+      context: ../../Server/docker-practice-server
+      dockerfile: ./Docker/Debug/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../Server/docker-practice-server/:/usr/src/app
+    depends_on:
+      - migrator
+  db:
+    build:
+        context: ../../db
+        dockerfile: ./Docker/Debug/Dockerfile
+    ports:
+      - "9042:9042"
+  migrator:
+    build:
+      context: ../../Migrator/Migrator
+      dockerfile: ./Docker/Debug/Dockerfile
+    depends_on:
+      - db
+    restart:
+      on-failure

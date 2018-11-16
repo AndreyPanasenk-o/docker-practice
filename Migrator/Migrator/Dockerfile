@@ -5,8 +5,8 @@ WORKDIR /Migrator
 COPY *.csproj ./
 COPY . ./
 
-ENV http_proxy 'http://proxy.corp.isddesign.com:8080'
-ENV https_proxy 'http://proxy.corp.isddesign.com:8080' 
+ENV http_proxy 'http://proxy.corp.com:port'
+ENV https_proxy 'http://proxy.corp.com:port' 
 
 RUN dotnet restore
 

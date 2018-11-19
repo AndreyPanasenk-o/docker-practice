@@ -9,7 +9,7 @@ namespace Migrator
         {
             try
             {
-                Cluster cluster = Cluster.Builder().AddContactPoint("10.88.20.95").WithPort(9043).WithQueryTimeout(600000)
+                Cluster cluster = Cluster.Builder().AddContactPoint("db").WithPort(9043).WithQueryTimeout(600000)
                     .Build();
                 ISession session = cluster.Connect();
                 Console.ForegroundColor = ConsoleColor.Yellow;

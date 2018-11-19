@@ -3,7 +3,7 @@ var router = express.Router();
 
 var cassandra = require('cassandra-driver');
 
-var client = new cassandra.Client({ contactPoints: ['10.88.20.95'], protocolOptions: { port: 9043} })
+var client = new cassandra.Client({ contactPoints: ['db'], protocolOptions: { port: 9043} })
 
 client.connect((err, result) => {
   console.log("cassandra connected");

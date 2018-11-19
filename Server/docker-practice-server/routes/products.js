@@ -3,7 +3,7 @@ fs = require('fs');
 var router = express.Router();
 
 var cassandra = require('cassandra-driver');
-var host = "10.88.20.95";
+var host = "db";
 var client = new cassandra.Client({ contactPoints: [host], protocolOptions: { port: 9042} })
 
 client.connect((err, result) => {
@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
             description: row.description,
             name: row.name,
             price: row.price,
-            mainImageUrl: 'http://' + host + ':3000/image?imageName=' + row.img
+            mainImageUrl: 'http://localhost:3000/image?imageName=' + row.img
         }
       }) });
     }

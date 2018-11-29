@@ -20,5 +20,5 @@ services:
   migrator:
     build:
       context: ../../Migrator/Migrator
-      dockerfile: ./Docker/Debug/Dockerfile
+      dockerfile: ./Docker/Release/Dockerfile
     command: sh -c 'while ! nc -z db 9042; do echo "... connecting to cassandra" && sleep 1; done && echo "Cassandra is up and running" && dotnet Migrator.dll'

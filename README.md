@@ -16,6 +16,13 @@ To prepare the app, update http://proxy.corp.com:port to your correct proxy serv
  - Server/docker-practice-server/Docker/Release/Dockerfile
  - UI/docker-practice-ui/Docker/Release/Dockerfile
 
+## Host
+By default the app is up and running on *localhost*
+If you want to set IP to make it reachable in network, you can change http://localhost to your IP address in next files:
+
+ - UI\docker-practice-ui\src\actions\product-actions.js (set server address)
+ - Server\docker-practice-server\routes\products.js (set server address)
+
 ## Build and running
 To build and run the app go to  Docker\Release and run next command
 ```

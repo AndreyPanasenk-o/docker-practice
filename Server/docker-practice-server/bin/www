@@ -12,8 +12,10 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(3030);
 app.set('port', port);
+
+
 
 /**
  * Create HTTP server.
@@ -22,12 +24,40 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ *  Check if cassandra DB is reachable and has correct migration
+ *  P.S. instead of correct migration in this case just products table existing is checked
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+
+try {
+  app.products.client.connect((err, result) => {
+    console.log("cassandra connected");
+  })
+
+  var getAllProducts = 'SELECT * FROM docker_practice.products'
+
+  app.products.client.execute(getAllProducts, [], (err, result) => {
+    if (err) {
+      console.log("ERROR");
+      console.log(err);
+      server.close();
+      process.exit(1);
+    }
+    else {
+      /**
+         * Listen on provided port, on all network interfaces.
+         */
+      console.log("cassandra is OK");
+      server.listen(port);
+      server.on('error', onError);
+      server.on('listening', onListening);
+    }
+  });
+}
+catch (ex) {
+  throw ex;
+}
+
 
 /**
  * Normalize a port into a number, string, or false.

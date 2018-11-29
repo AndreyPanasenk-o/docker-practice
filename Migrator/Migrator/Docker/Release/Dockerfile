@@ -14,4 +14,8 @@ RUN dotnet publish -c Release -o out
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /Migrator/out
 COPY --from=build-env /Migrator/out .
-ENTRYPOINT ["dotnet", "Migrator.dll"]
+
+ENV http_proxy 'http://proxy.corp.com:port'
+ENV https_proxy 'http://proxy.corp.com:port' 
+
+RUN apt-get update && apt-get install -y --no-install-recommends netcat

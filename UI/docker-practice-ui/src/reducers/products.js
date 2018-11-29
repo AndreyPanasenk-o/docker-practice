@@ -33,37 +33,5 @@ export default function productReducer(state = initialState, action) {
             };
         default:
             return state;
-        /*return [
-            {
-                img: "/img/camera.jpg",
-                name: "Camera",
-                description: "Nice photo camera to save best moments of your life",
-                price: "320"
-            },
-            {
-                img: "/img/ball.jpg",
-                name: "Ball",
-                description: "Best ball ever",
-                price: "30"
-            },
-            {
-                img: "/img/sofa.jpeg",
-                name: "Sofa",
-                description: "Very comfortable sofa",
-                price: "499"
-            },
-            {
-                img: "/img/laptop.jpeg",
-                name: "Laptop",
-                description: "High speed, small weight",
-                price: "1379"
-            },
-            {
-                img: "/img/car.jpg",
-                name: "Car",
-                description: "Ready for your trip",
-                price: "96999"
-            }
-        ];*/
     }
 }

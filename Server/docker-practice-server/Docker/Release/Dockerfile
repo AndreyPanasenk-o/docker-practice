@@ -1,6 +1,6 @@
 FROM node:8.12-slim
 
-EXPOSE 3000
+EXPOSE 3030
 
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app

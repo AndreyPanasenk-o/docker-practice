@@ -19,7 +19,7 @@ export const fetchProductsFailure = error => ({
 export function fetchProducts() {
     return dispatch => {
         dispatch(fetchProductsBegin());
-        return fetch("http://localhost:3000/products")
+        return fetch("http://localhost:3005/products")
             .then(handleErrors)
             .then(res => res.json())
             .then(json => {

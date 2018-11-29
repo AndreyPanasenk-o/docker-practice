@@ -8,30 +8,23 @@ services:
       - "4000:3000"
     volumes:
       - ../../UI/docker-practice-ui/:/usr/src/app
-    command: "npm start"
-    depends_on:
-      - server
+    command: sh -c 'while ! nc -z server 3030; do echo "... connecting to server" && sleep 1; done && echo "Server is up and running" && npm start'
   server:
     build:
       context: ../../Server/docker-practice-server
       dockerfile: ./Docker/Debug/Dockerfile
     ports:
-      - "3000:3000"
+      - "3005:3030"
     volumes:
       - ../../Server/docker-practice-server/:/usr/src/app
-    depends_on:
-      - migrator
+    restart:
+      on-failure
   db:
-    build:
-        context: ../../db
-        dockerfile: ./Docker/Debug/Dockerfile
+    image: cassandra:3.7
     ports:
       - "9042:9042"
   migrator:
     build:
       context: ../../Migrator/Migrator
       dockerfile: ./Docker/Debug/Dockerfile
-    depends_on:
-      - db
-    restart:
-      on-failure
+    command: sh -c 'while ! nc -z db 9042; do echo "... connecting to cassandra" && sleep 1; done && echo "Cassandra is up and running" && dotnet Migrator.dll'
